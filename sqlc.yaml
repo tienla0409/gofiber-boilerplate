@@ -1,0 +1,26 @@
+version: "2"
+cloud:
+    organization: ""
+    project: ""
+    hostname: ""
+servers: []
+sql:
+    - engine: "postgresql"
+      queries: "db/queries"
+      schema: "db/migrations"
+      gen:
+          go:
+              package: "db"
+              sql_package: "pgx/v5"
+              out: "db/sqlc"
+              emit_json_tags: true
+              emit_interface: true
+              emit_empty_slices: true
+              overrides:
+                    - go_type: "github.com/google/uuid.UUID"
+                      db_type: "uuid"
+                    - go_type: "time.Time"
+                      db_type: "timestamptz"
+plugins: []
+rules: []
+options: {}
